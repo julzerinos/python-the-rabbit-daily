@@ -30,7 +30,7 @@ def subs_view_subs(conn, stype=0, test=False):
             '''
             )
     
-    if stype == 0:
+    elif stype == 0:
         c.execute(
             '''SELECT * FROM subscribers
             '''
@@ -44,3 +44,17 @@ def subs_view_subs(conn, stype=0, test=False):
             )
 
     return c.fetchall()
+
+
+def subs_update_subs(conn, sid):
+    c = conn.cursor()
+
+    c.execute(
+        '''UPDATE subscribers
+        SET rabbits_recv = rabbits_recv + 1
+        WHERE subs_id = ?
+        ''',
+        (sid,)
+        )
+
+    conn.commit()

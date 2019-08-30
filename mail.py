@@ -4,14 +4,14 @@ from email.mime.multipart import MIMEMultipart
 
 import getpass
 
-from databases.db_actions import subs_view_subs
+from databases.db_actions import subs_view_subs, subs_update_subs
 from databases.db_conn_decr import dbconnect
 
 from scraper.scrapers import pix_get_src
 from templates.templates import email_tmpl
 
 sender_email = "therabbitdaily@gmail.com"
-password = 'xxx'
+password = 'snfulmlsbumddzuc'
 
 message = MIMEMultipart("alternative")
 message["Subject"] = "The Rabbit Daily"
@@ -42,3 +42,5 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
             server.sendmail(
                 sender_email, sub[1], message.as_string()
             )
+            print(sub)
+            subs_update_subs(conn, sub[0])
