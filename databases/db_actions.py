@@ -26,7 +26,7 @@ def subs_view_subs(conn, stype=0, test=False):
     if test:
         c.execute(
             '''SELECT * FROM subscribers
-            WHERE subs_id IN (1, 4)
+            WHERE subs_id = 1 OR subs_id = 4
             '''
             )
     
