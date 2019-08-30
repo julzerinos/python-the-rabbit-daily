@@ -7,11 +7,11 @@ import getpass
 from databases.db_actions import subs_view_subs
 from databases.db_conn_decr import dbconnect
 
-from scraper.hrs_scraper import get_rabbit_link
+from scraper.scrapers import pix_get_src
 from templates.templates import email_tmpl
 
 sender_email = "therabbitdaily@gmail.com"
-password = 'Ih8uih8u'
+password = 'xxx'
 
 message = MIMEMultipart("alternative")
 message["Subject"] = "The Rabbit Daily"
@@ -20,7 +20,7 @@ message["From"] = 'The Hasty Rabbit Courier'
 # Create the plain-text and HTML version of your message
 text = """\
 Whatup there should be a rabbit here"""
-email_html = email_tmpl(get_rabbit_link())
+email_html = email_tmpl(pix_get_src())
 
 # Turn these into plain/html MIMEText objects
 part1 = MIMEText(text, "plain")
