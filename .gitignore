@@ -1,5 +1,9 @@
+# Databases
+*.db
+
 # Virtualenv
 therabbitdaily/
+trb/
 
 # VS Code
 .vscode/
