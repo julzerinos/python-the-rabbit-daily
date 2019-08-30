@@ -11,7 +11,7 @@ from scraper.hrs_scraper import get_rabbit_link
 from templates.templates import email_tmpl
 
 sender_email = "therabbitdaily@gmail.com"
-password = 'Ih8uih8u'
+password = 'fihyyutkveqkzvpk'
 
 message = MIMEMultipart("alternative")
 message["Subject"] = "The Rabbit Daily"
@@ -20,7 +20,7 @@ message["From"] = 'The Hasty Rabbit Courier'
 # Create the plain-text and HTML version of your message
 text = """\
 Whatup there should be a rabbit here"""
-email_html = email_tmpl(get_rabbit_link())
+email_html = email_tmpl('https://cdn.pixabay.com/photo/2014/06/21/08/43/rabbit-373691_960_720.jpg')
 
 # Turn these into plain/html MIMEText objects
 part1 = MIMEText(text, "plain")
@@ -36,8 +36,8 @@ context = ssl.create_default_context()
 with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
     server.login(sender_email, password)
     
-    with dbconnect('/home/j/Projects/the-rabbit-daily/databases/subscribers.db') as conn:
-        subs = subs_view_subs(conn, test=True)
+    with dbconnect('/home/julzerinos/Projects/the-rabbit-daily/databases/subscribers.db') as conn:
+        subs = subs_view_subs(conn)
         for sub in subs:
             server.sendmail(
                 sender_email, sub[1], message.as_string()
