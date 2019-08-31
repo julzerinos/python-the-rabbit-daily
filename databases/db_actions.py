@@ -1,5 +1,6 @@
 import datetime
 import time
+import re
 
 try:
     from databases.db_conn_decr import dbconnect
@@ -8,15 +9,23 @@ except ModuleNotFoundError:
 
 def subs_insert_subs(conn, emails, stype=1):
     c = conn.cursor()
-    for email in emails:
-        c.execute(
-            '''INSERT OR IGNORE INTO subscribers (date_added, email, subs_type)
-            VALUES (
-                ?,
-                ?,
-                ?
-                )''',
-                (datetime.datetime.today().strftime('%Y-%m-%d'),email,stype),
+    valid_rows = [
+        (datetime.datetime.today().strftime('%Y-%m-%d'), email, stype)
+        for email in emails if re.fullmatch(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email)
+    ]
+    print(valid_rows)
+    c.executemany(
+        '''INSERT OR IGNORE INTO subscribers (date_added, email, subs_type)
+        VALUES (
+            ?,
+            ?,
+            ?
+            )''',
+            valid_rows,
+        )
+    if len(valid_rows) != len(emails):
+        print(
+            f"The following emails in invalid format were not added: {set(emails) - set(row[1] for row in valid_rows)}"
             )
     conn.commit()
 
