@@ -1,6 +1,8 @@
+# Databases
+*.db
 
-
-#
+# Virtualenv
+therabbitdaily/
 trd/
 
 # VS Code

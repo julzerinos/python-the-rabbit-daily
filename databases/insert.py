@@ -1,7 +1,12 @@
+import sys
+
 from db_conn_decr import dbconnect
 from db_actions import subs_insert_subs, subs_view_subs
 
 
+if len(sys.argv) < 2:
+    raise SystemExit
+
 with dbconnect('databases/subscribers.db') as conn:
-    subs_insert_subs(conn, ['a.jablonska96@gmail.com', 'j.pawelec87@gmail.com', 'nibre0809@gmail.com'])
+    subs_insert_subs(conn, sys.argv[1:])
     print(subs_view_subs(conn))
