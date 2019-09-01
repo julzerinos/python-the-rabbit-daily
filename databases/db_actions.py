@@ -13,7 +13,6 @@ def subs_insert_subs(conn, emails, stype=1):
         (datetime.datetime.today().strftime('%Y-%m-%d'), email, stype)
         for email in emails if re.fullmatch(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email)
     ]
-    print(valid_rows)
     c.executemany(
         '''INSERT OR IGNORE INTO subscribers (date_added, email, subs_type)
         VALUES (
@@ -35,7 +34,7 @@ def subs_view_subs(conn, stype=0, test=False):
     if test:
         c.execute(
             '''SELECT * FROM subscribers
-            WHERE subs_id = 1 OR subs_id = 4
+            WHERE subs_id = 1
             '''
             )
     
