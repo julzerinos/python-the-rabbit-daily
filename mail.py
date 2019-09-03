@@ -36,10 +36,9 @@ context = ssl.create_default_context()
 with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
     server.login(sender_email, password)
     
-    with dbconnect('/home/julzerinos/Projects/the-rabbit-daily/databases/subscribers.db') as conn:
-        subs = subs_view_subs(conn)
+    with dbconnect('databases/subscribers.db') as conn:
+        subs = subs_view_subs(conn, test=True)
         for sub in subs:
             server.sendmail(
                 sender_email, sub[1], message.as_string()
             )
-            subs_update_subs(conn, sub[0])
