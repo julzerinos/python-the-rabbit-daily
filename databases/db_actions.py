@@ -26,7 +26,9 @@ def subs_insert_subs(conn, emails, stype=1):
         print(
             f"The following emails in invalid format were not added: {set(emails) - set(row[1] for row in valid_rows)}"
             )
+
     conn.commit()
+    return len(valid_rows)
 
 
 def subs_view_subs(conn, stype=0, test=False):
