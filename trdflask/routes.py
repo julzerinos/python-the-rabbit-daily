@@ -1,8 +1,6 @@
-from flask import Flask, render_template, request
+from flask import render_template, request
 
-trdflask = Flask(__name__)
-
-from trdflask import routes
+from trdflask import trdflask
 
 from databases.db_actions import subs_insert_subs
 from databases.db_conn_decr import dbconnect
