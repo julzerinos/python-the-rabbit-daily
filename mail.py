@@ -7,11 +7,7 @@ import getpass
 from databases.db_actions import subs_view_subs, subs_update_subs
 from databases.db_conn_decr import dbconnect
 
-<<<<<<< HEAD
 from scraper.scrapers import pix_get_src
-=======
-from scraper.hrs_scraper import get_rabbit_link
->>>>>>> Crontab related fixes
 from templates.templates import email_tmpl
 
 sender_email = "therabbitdaily@gmail.com"
