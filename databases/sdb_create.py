@@ -22,6 +22,16 @@ with dbconnect('databases/subscribers.db') as conn:
                  )
 
     c.execute(
+        '''INSERT OR IGNORE INTO subscribers (date_added, email, subs_type)
+        VALUES (
+            ?,
+            "therabbitdaily@gmail.com",
+            1
+            )''',
+            (datetime.datetime.today().strftime('%Y-%m-%d'),),
+        )
+
+    c.execute(
         '''CREATE VIEW IF NOT EXISTS vw_users_daily
         AS
         SELECT * FROM subscribers where subs_type = 1

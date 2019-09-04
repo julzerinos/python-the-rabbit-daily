@@ -10,8 +10,12 @@ from databases.db_conn_decr import dbconnect
 from scraper.scrapers import pix_get_src
 from templates.templates import email_tmpl
 
-sender_email = "therabbitdaily@gmail.com"
-password = 'snfulmlsbumddzuc'
+from trdflask import trdflask
+
+import config
+
+sender_email = config.SNDR
+password = config.PSWD
 
 message = MIMEMultipart("alternative")
 message["Subject"] = "The Rabbit Daily"
@@ -36,8 +40,8 @@ context = ssl.create_default_context()
 with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
     server.login(sender_email, password)
     
-    with dbconnect('/home/julzerinos/Projects/the-rabbit-daily/databases/subscribers.db') as conn:
-        subs = subs_view_subs(conn)
+    with dbconnect(config.DB_PATH) as conn:
+        subs = subs_view_subs(conn, test=config.TEST)
         for sub in subs:
             server.sendmail(
                 sender_email, sub[1], message.as_string()
