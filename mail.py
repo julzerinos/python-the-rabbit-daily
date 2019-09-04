@@ -10,8 +10,6 @@ from databases.db_conn_decr import dbconnect
 from scraper.scrapers import pix_get_src
 from templates.templates import email_tmpl
 
-from trdflask import trdflask
-
 import config
 
 sender_email = config.SNDR
