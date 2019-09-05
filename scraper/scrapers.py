@@ -22,8 +22,17 @@ def pix_get_src():
     if page.status_code != 200:
         return None
 
-    photos = BeautifulSoup(page.content, 'html.parser').select('div.item > a')
+    items = BeautifulSoup(page.content, 'html.parser').select('div.item')
+    photos = [
+        item.select_one('a') for item in items
+        if "Rabbit" in ' '.join(i.text for i in item.select('span > a'))
+        or "Hare" in ' '.join(i.text for i in item.select('span > a'))
+        and "Easter" not in ' '.join(i.text for i in item.select('span > a'))
+    ]
+    
     link = f"https://pixabay.com{photos[random.randint(0, len(photos) - 1)]['href']}"
+
+    print(link)
 
     inner_page = requests.get(link)
     if inner_page.status_code != 200:
@@ -32,3 +41,6 @@ def pix_get_src():
     return BeautifulSoup(
         inner_page.content, 'html.parser'
         ).select_one('div#media_container img')['src']
+
+if __name__ == "__main__":
+    pix_get_src()
