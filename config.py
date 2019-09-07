@@ -1,6 +1,6 @@
 # App
 
-TEST = True
+TEST = False
 
 # Email
 
@@ -9,4 +9,4 @@ PSWD = 'snfulmlsbumddzuc'
 
 # Database
 
-DB_PATH = '/home/j/Projects/the-rabbit-daily/databases/subscribers.db'
+DB_PATH = '/home/julzerinos/Projects/the-rabbit-daily/databases/subscribers.db'
