@@ -1,6 +1,9 @@
 # Databases
 *.db
 
+# Config file
+config.py
+
 # Virtualenv
 therabbitdaily/
 trd/
